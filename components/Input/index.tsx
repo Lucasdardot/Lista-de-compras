@@ -2,7 +2,14 @@ import React from "react"
 import {View,Text,TextInput, Pressable} from "react-native"
 import {styles} from './styles'
 
-export function Input() {
+
+interface InputProps {
+    item: string
+    setItem: (text: string) => void
+    adicionarItem: ()=> void
+}
+
+export function Input({item,setItem,adicionarItem}: InputProps) {
     return (
         <View>
             <TextInput

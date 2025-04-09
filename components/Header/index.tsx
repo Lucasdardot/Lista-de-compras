@@ -8,7 +8,11 @@ import {View,Text } from "react-native"
         MenuTrigger,
       } from 'react-native-popup-menu';
 
-export function Header(){
+      interface HeaderProps {
+        limparLista: () => void
+      }
+
+export function Header({limparLista} : HeaderProps){
     
     return(
         <View style = {styles.header}>
