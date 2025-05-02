@@ -1,13 +1,14 @@
 import {StyleSheet} from "react-native"
 
 export const styles = StyleSheet.create({
-    itemContainer:{
-        display:"flex",
-        alignItems:"center",
-        justifyContent:"center",
-        flexDirection:"row",
-        padding:10
-    },
+    itemContainer: {
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center",
+       
+        padding: 10,
+        
+      },
     btnCheck:{
         borderWidth:2,
         borderColor:"white",
@@ -26,12 +27,11 @@ export const styles = StyleSheet.create({
         color:"white",
         display:'flex',
         flex:1,
-       backgroundColor:"gray"
+       backgroundColor:"blue"
     },
     remove:{
         color:"white",
         marginTop:8,
-        marginLeft:200,
         borderColor:"red",
         borderWidth:1,
         
@@ -83,6 +83,7 @@ export const styles = StyleSheet.create({
     },textPreco:{
         color:"white",
         flex:1,
-        backgroundColor:"gray"
+        justifyContent:"center",
+        backgroundColor:"red"
     }
 })

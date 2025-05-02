@@ -26,6 +26,8 @@ export function ItemCompra({item,toggleComprado,deleteItem,updateItem}:ItemCompr
     const[preco, setPreco] = useState(item.preco?.toString() || '')
     const[quantidade, setQuantidade] = useState(item.quantidade?.toString() || '')
 
+    console.log(item.quantidade)
+
     const handleSave = ()=>{
         updateItem(item.id,
             {
@@ -34,8 +36,23 @@ export function ItemCompra({item,toggleComprado,deleteItem,updateItem}:ItemCompr
             }  
         )
         setModalVisible(false)
-    
 
+    }
+
+    const formartPreco = (value: string) =>{
+        const cleanValue = value.replace(/[^0-9]/g, '') // [^0-9] apaga tudo que NÃO(^) é algo de 0-9, g = GLOBAL
+        if(!cleanValue){ // se value está vazio, sai da função
+            setPreco('')
+            return
+        }       
+
+        //se tem um valor válido (0-9), a função é executada
+
+        //converte de string para número e divide por 100 para transformar em reais
+
+        const numberValue = parseInt(cleanValue, 10) /100 // transforma de '5'(string) para 5 (número)
+        const formatValue = numberValue.toFixed(2).replace(".",",")
+        setPreco(formatValue)
     }
     return (
         <View style = { styles.itemContainer } >
@@ -44,14 +61,14 @@ export function ItemCompra({item,toggleComprado,deleteItem,updateItem}:ItemCompr
                    {item.comprado ? '✓' : ''}
                 </Text>
             </Pressable>
-
-            <Text style = {styles.textlist}>{item.nome}</Text>
-
+            <Text style={styles.textlist}>{item.nome || "Nome não disponível"}</Text>
+            
             
             {(item.preco || item.quantidade) &&
                 (
                     <Text style={styles.textPreco}>
-                        {item.preco} {item.quantidade}
+                        {item.preco?`R$${item.preco.toFixed(2).replace(".",",")}`:""}
+                        {item.quantidade? ` x${item.quantidade}`:""}
                     </Text>
                 )
             }
@@ -61,6 +78,8 @@ export function ItemCompra({item,toggleComprado,deleteItem,updateItem}:ItemCompr
             <Pressable onPress={()=>deleteItem(item.id)}>
                 <Text style={styles.remove}>Remover</Text>
             </Pressable>
+               
+            
 
             <TouchableOpacity style={styles.pressablePreco} onPress={()=>setModalVisible(true)}>
                 <Text style = {styles.btnPreco}>$</Text>
@@ -79,7 +98,7 @@ export function ItemCompra({item,toggleComprado,deleteItem,updateItem}:ItemCompr
                           style={styles.inputModal}
                           placeholder = "insira o preço"
                           value={preco}
-                          onChangeText={setPreco}
+                          onChangeText={formartPreco}
                           keyboardType = "numeric"
                             />
                             <TextInput

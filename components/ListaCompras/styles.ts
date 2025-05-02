@@ -7,5 +7,10 @@ export const styles = StyleSheet.create({
        
     },
     
+totalBottom:{
 
+},
+textTotal:{
+    color:"white"
+}
 })
